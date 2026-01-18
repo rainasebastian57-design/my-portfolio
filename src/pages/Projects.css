@@ -1,0 +1,138 @@
+/* ===== Projects Section ===== */
+.projects-section {
+  padding: 4rem 2rem;
+  background: #0f111a;
+  color: #fff;
+  text-align: center;
+}
+
+.projects-header h1 {
+  font-size: 3rem;
+  margin-bottom: 0.5rem;
+}
+
+.projects-header p {
+  color: #aaa;
+  margin-bottom: 2rem;
+}
+
+/* ===== Slider Wrapper ===== */
+.projects-slider-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+/* Slider */
+.projects-slider {
+  display: flex;
+  gap: 2rem;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  padding-bottom: 1rem;
+}
+
+.projects-slider::-webkit-scrollbar {
+  display: none;
+}
+
+/* Slider Buttons */
+.slider-btn {
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  color: #fff;
+  font-size: 2rem;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border-radius: 8px;
+}
+
+.slider-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.slider-btn.left {
+  margin-right: 1rem;
+}
+
+.slider-btn.right {
+  margin-left: 1rem;
+}
+
+/* ===== Project Card ===== */
+.project-card {
+  background: #1a1a2e;
+  border-radius: 15px;
+  overflow: hidden;
+  width: 380px;
+  flex: 0 0 auto;
+  transition: transform 0.3s ease;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+}
+
+.project-card:hover {
+  transform: translateY(-5px);
+}
+
+/* Media */
+.project-media {
+  width: 350px;
+  height: 375px;
+  overflow: hidden;
+  border-bottom: 1px solid #333;
+}
+
+.project-media img,
+.project-media video {
+  width: 280px;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.project-card:hover .project-media img,
+.project-card:hover .project-media video {
+  transform: scale(1.05);
+}
+
+/* Content */
+.project-content {
+  padding: 1rem;
+  text-align: left;
+}
+
+.project-index {
+  font-weight: bold;
+  color: #7f5af0;
+  font-size: 0.9rem;
+}
+
+.project-title {
+  font-size: 1.5rem;
+  margin: 0.3rem 0;
+  color: #fff;
+}
+
+.project-description {
+  font-size: 1rem;
+  color: #ccc;
+  margin-bottom: 1rem;
+}
+
+/* View Project Button */
+.project-link {
+  display: inline-block;
+  padding: 0.5rem 1.2rem;
+  background: linear-gradient(90deg, #7f5af0, #0fbcf9);
+  color: #fff;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+.project-link:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
