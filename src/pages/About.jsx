@@ -37,7 +37,7 @@ function About() {
 
             <div className="activity-item">⚡ Volunteering</div>
             <div className="activity-item">⚡ Hackathon Development</div>
-            <div className="activity-item">⚡ Event Head (Pragya)</div>
+            <div className="activity-item">⚡ Event Head (Prayag)</div>
           </div>
         </div>
 
