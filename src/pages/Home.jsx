@@ -1,6 +1,7 @@
 import React from 'react';
 import './Home.css';
 import heroImage from '../assets/home.png'; // ensure this path matches your project
+import { Link } from 'react-router-dom';
 
 function Home() {
   return (
@@ -22,9 +23,9 @@ function Home() {
             <a href="/CV.pdf" download className="btn btn-primary">
               Download CV
             </a>
-            <a href="/projects" className="btn btn-secondary">
+            <Link to="/projects" className="btn btn-secondary">
               View Projects
-            </a>
+            </Link>
           </div>
         </div>
 
