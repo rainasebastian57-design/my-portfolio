@@ -40,19 +40,19 @@ const Projects = () => {
           {/* Project 02 – Image */}
           <ProjectCard
             index="02"
-            title="Book Shelf"
-            description="A simple google extension to save and manage files."
-            image="/project2.png"
-            link="https://github.com/rainasebastian57-design/book_shelf.git"
+            title="Sentiment-analyser"
+            description="A tool to analyze sentiment in text."
+            video="/videos/video1.mp4"
+            link="https://sentiment-frontent.onrender.com/"
           />
 
           {/* Project 03 – Image */}
           <ProjectCard
             index="03"
-            title="Sleigh The Code"
-            description="A Christmas themed drawing using turtle."
-            image="/project3.png"
-            link="https://github.com/rainasebastian57-design/SLEIGH-THE-CODE.git"
+            title="Book Shelf"
+            description="A simple file management extension."
+            image="/project2.png"
+            link="https://github.com/rainasebastian57-design/book_shelf.git"
           />
         </div>
 
