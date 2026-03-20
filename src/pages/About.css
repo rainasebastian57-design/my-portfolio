@@ -2,7 +2,7 @@
   background-color: #0a0416;
   color: white;
   /* Fluid padding: scales between 40px/5% and 120px/10% based on screen width */
-  padding: clamp(60px, 8vw, 120px) clamp(5%, 8vw, 10%);
+  padding: clamp(70px, 8vw, 140px) clamp(5%, 8vw, 10%);
   min-height: 100vh;
   font-family: 'Poppins', sans-serif;
   background-image: 
