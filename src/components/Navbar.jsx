@@ -10,9 +10,6 @@ function Navbar() {
         <Link to="/about" style={{ color: '#fff' }}>About</Link>
         <Link to="/projects" style={{ color: '#fff' }}>Projects</Link>
         <Link to="/contact" style={{ color: '#fff' }}>Contact</Link>
-        <a href="/CV.pdf" download style={{ color: '#fff', border: '1px solid #fff', padding: '0.2rem 0.5rem', borderRadius: '4px' }}>
-          Download CV
-        </a>
       </div>
     </nav>
   );
