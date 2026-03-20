@@ -2,13 +2,14 @@
 .contact-scene {
   min-height: 100vh;
   display: flex;
-  flex-direction: column; /* vertical layout */
-  justify-content: flex-start; /* nodes flow naturally from top */
+  flex-direction: column;
+  justify-content: flex-start;
   position: relative;
   background: url("/futuristic-bg.jpg") center/cover no-repeat;
-  overflow: hidden;
+  /* Changed overflow to hidden only on X to allow vertical scrolling */
+  overflow-x: hidden; 
   color: #e5e7eb;
-  padding: 2rem;
+  padding: clamp(1rem, 5vw, 2rem); /* Fluid padding */
   box-sizing: border-box;
 }
 
@@ -30,13 +31,15 @@
   position: absolute;
   top: 30%;
   left: 50%;
-  width: 420px;
-  height: 420px;
+  /* Scaled orb size for mobile */
+  width: clamp(280px, 60vw, 420px);
+  height: clamp(280px, 60vw, 420px);
   background: radial-gradient(circle, rgba(99, 102, 241, 0.25), transparent 70%);
   transform: translateX(-50%);
   filter: blur(40px);
   animation: orbFloat 8s ease-in-out infinite;
   z-index: 2;
+  pointer-events: none; /* Prevents orb from blocking clicks on links */
 }
 
 /* Center message */
@@ -46,19 +49,22 @@
   text-align: center;
   max-width: 600px;
   margin: 0 auto;
-  padding-top: 18vh;
+  /* Uses vh for laptop, smaller margin for mobile */
+  padding-top: clamp(10vh, 15vh, 18vh); 
 }
 
 .contact-center h2 {
-  font-size: 3rem;
+  font-size: clamp(2rem, 8vw, 3rem); /* Responsive font size */
   font-weight: 700;
   letter-spacing: -0.6px;
+  line-height: 1.2;
 }
 
 .contact-center p {
   margin-top: 1rem;
   color: #9ca3af;
-  font-size: 1.05rem;
+  font-size: clamp(0.9rem, 2vw, 1.05rem);
+  padding: 0 10px;
 }
 
 /* ===== Contact Nodes ===== */
@@ -66,27 +72,31 @@
   position: relative;
   z-index: 3;
   display: flex;
-  flex-direction: column; /* vertical stack */
+  flex-direction: column;
   align-items: center;
-  gap: 2.4rem;
-  margin-top: 5rem;
-  margin-bottom: 6rem; /* ensures space above footer */
+  gap: 1.8rem; /* Slightly tighter gap for mobile */
+  margin-top: clamp(3rem, 10vw, 5rem);
+  margin-bottom: 4rem;
   animation: nodeFloat 6s ease-in-out infinite;
+  width: 100%;
 }
 
 .node {
-  width: 360px;
-  padding: 1.8rem 2.4rem;
+  /* Box scales from 90% width on mobile to 360px on laptop */
+  width: min(90%, 360px); 
+  padding: clamp(1.2rem, 4vw, 1.8rem) clamp(1.5rem, 5vw, 2.4rem);
   border-radius: 22px;
   background: rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px); /* Safari support */
   border: 1px solid rgba(255, 255, 255, 0.14);
   text-align: center;
-  transition: all 0.45s ease;
+  transition: all 0.45s cubic-bezier(0.23, 1, 0.32, 1);
+  box-sizing: border-box;
 }
 
 .node span {
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   letter-spacing: 1.2px;
   text-transform: uppercase;
   color: #a5b4fc;
@@ -94,53 +104,58 @@
 
 .node p {
   margin-top: 0.5rem;
-  font-size: 1rem;
+  font-size: clamp(0.9rem, 2vw, 1.1rem);
+  word-break: break-all; /* Prevents long emails/links from breaking layout */
 }
 
 .node:hover {
-  transform: translateY(-10px) scale(1.04);
-  box-shadow: 0 0 55px rgba(99, 102, 241, 0.45);
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 15px 45px rgba(99, 102, 241, 0.35);
+  border-color: rgba(165, 180, 252, 0.5);
 }
 
-.github-node p {
-  word-break: break-word;
+.contact-nodes a {
+  text-decoration: none;
+  color: inherit;
+  display: block; /* Makes the entire area clickable */
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
 
 /* ===== Footer ===== */
 .scene-footer {
+  margin-top: auto; /* Pushes footer to bottom */
   text-align: center;
   font-size: 0.8rem;
   color: #9ca3af;
   z-index: 3;
-  padding: 1rem 0;
+  padding: 2rem 0;
 }
 
 /* ===== Animations ===== */
 @keyframes nodeFloat {
-  0% { transform: translateY(0); }
-  50% { transform: translateY(-14px); }
-  100% { transform: translateY(0); }
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
 }
 
 @keyframes orbFloat {
-  0% { transform: translate(-50%, 0); }
-  50% { transform: translate(-50%, -22px); }
-  100% { transform: translate(-50%, 0); }
+  0%, 100% { transform: translate(-50%, 0); }
+  50% { transform: translate(-50%, -15px); }
 }
 
-/* ===== Responsive ===== */
+/* ===== Responsive Tweaks ===== */
 @media (max-width: 640px) {
-  .contact-center h2 {
-    font-size: 2.2rem;
+  .contact-scene {
+    padding: 1rem;
   }
-
-  .node {
-    width: 280px;
+  
+  /* Disable hover transform on mobile to prevent "sticky" hover states */
+  .node:hover {
+    transform: none;
   }
-
+  
+  .contact-nodes {
+    animation: none; /* Recommended: heavy animations can feel laggy on mobile browsers */
+  }
 }
-.contact-nodes a {
-  text-decoration: none;
-  color: inherit;
-}
-

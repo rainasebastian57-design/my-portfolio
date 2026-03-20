@@ -3,10 +3,12 @@
   min-height: 100vh;
   display: flex;
   align-items: center;
-  padding: 2rem;
+  /* Fluid padding for top/bottom and sides */
+  padding: clamp(80px, 10vh, 120px) clamp(1rem, 5vw, 2rem);
   background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
   color: #ffffff;
   box-sizing: border-box;
+  overflow: hidden;
 }
 
 .hero-content {
@@ -15,47 +17,50 @@
   align-items: center;
   max-width: 1200px;
   margin: 0 auto;
-  flex-wrap: wrap; /* ensures responsiveness */
-  gap: 2rem;
+  flex-wrap: wrap; 
+  gap: clamp(2rem, 5vw, 4rem); /* Space between text and image grows with screen */
+  width: 100%;
 }
 
 /* ===== Text Section ===== */
 .hero-text {
-  flex: 1;
-  min-width: 280px;
+  flex: 1.2; /* Gives text slightly more room than the image */
+  min-width: 300px;
 }
 
 .hero-text h1 {
-  font-size: 3rem;
+  /* Fluid font-size: scales between 2.2rem and 3.5rem */
+  font-size: clamp(2.2rem, 6vw, 3.5rem);
   font-weight: 700;
-  line-height: 1.2;
-  margin-bottom: 1rem;
+  line-height: 1.1;
+  margin-bottom: 1.5rem;
 }
 
 .hero-text h1 span {
-  color: #6366f1; /* highlight your name */
+  color: #6366f1;
 }
 
+/* Wave animation kept exactly as you had it */
 .wave {
   display: inline-block;
   animation: wave 2s infinite;
+  transform-origin: 70% 70%; /* Makes wave look more natural */
 }
 
 @keyframes wave {
-  0% { transform: rotate(0deg); }
-  10% { transform: rotate(14deg); }
-  20% { transform: rotate(-8deg); }
-  30% { transform: rotate(14deg); }
-  40% { transform: rotate(-4deg); }
-  50% { transform: rotate(10deg); }
-  60% { transform: rotate(0deg); }
-  100% { transform: rotate(0deg); }
+  0%, 100% { transform: rotate(0deg); }
+  20% { transform: rotate(-10deg); }
+  40% { transform: rotate(14deg); }
+  60% { transform: rotate(-4deg); }
+  80% { transform: rotate(10deg); }
 }
 
 .hero-text p {
-  font-size: 1.1rem;
+  font-size: clamp(1rem, 1.5vw, 1.2rem);
   color: #d1d5db;
-  margin-bottom: 2rem;
+  margin-bottom: 2.5rem;
+  line-height: 1.6;
+  max-width: 550px; /* Prevents lines from getting too long on ultra-wide screens */
 }
 
 /* ===== Buttons ===== */
@@ -66,13 +71,14 @@
 }
 
 .btn {
-  padding: 0.8rem 1.8rem;
-  border-radius: 8px;
+  padding: 0.9rem 2rem;
+  border-radius: 10px;
   text-decoration: none;
   font-weight: 600;
-  transition: all 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   display: inline-block;
   text-align: center;
+  border: 2px solid transparent;
 }
 
 .btn-primary {
@@ -82,6 +88,8 @@
 
 .btn-primary:hover {
   background-color: #4f46e5;
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(99, 102, 241, 0.3);
 }
 
 .btn-secondary {
@@ -91,51 +99,65 @@
 }
 
 .btn-secondary:hover {
-  background-color: #6366f1;
-  color: #fff;
+  background-color: rgba(99, 102, 241, 0.1);
+  transform: translateY(-3px);
 }
 
 /* ===== Image Section ===== */
 .hero-image {
   flex: 1;
-  min-width: 280px;
-  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .hero-image img {
-  max-width: 350px;
-  height: 350px;
-  border-radius: 12px;
-  box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-  /* No animation, static image */
+  /* Fluid image size: scales with screen, maxes at 400px */
+  width: 100%;
+  max-width: clamp(280px, 35vw, 400px); 
+  height: auto; /* Maintains aspect ratio */
+  aspect-ratio: 1 / 1; /* Keeps it square */
+  object-fit: cover;
+  border-radius: 20px;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-/* ===== Responsive ===== */
-@media (max-width: 768px) {
+/* ===== Responsive Mobile Tweaks ===== */
+@media (max-width: 992px) {
   .hero-content {
-    flex-direction: column-reverse; /* stack text above image */
+    flex-direction: column-reverse; /* Image on top is often better for mobile "first impression" */
     text-align: center;
-  }
-
-  .hero-text h1 {
-    font-size: 2.4rem;
-  }
-
-  .hero-buttons {
     justify-content: center;
+  }
+  
+  .hero-text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .hero-text p {
+    margin-left: auto;
+    margin-right: auto;
   }
 }
 
 @media (max-width: 480px) {
-  .hero-text h1 {
-    font-size: 2rem;
+  .hero {
+    padding-top: 60px; /* Give space for mobile nav if you have one */
   }
 
-  .hero-text p {
-    font-size: 1rem;
+  .hero-buttons {
+    width: 100%;
+    flex-direction: column;
   }
 
   .btn {
-    width: 100%;
+    width: 100%; /* Full width buttons are much easier to tap on phones */
+  }
+
+  .hero-image img {
+    max-width: 240px; /* Slightly smaller on very small phones */
   }
 }

@@ -1,19 +1,22 @@
 /* ===== Projects Section ===== */
 .projects-section {
-  padding: 4rem 2rem;
+  padding: clamp(3rem, 8vw, 6rem) clamp(1rem, 5vw, 2rem);
   background: #0f111a;
   color: #fff;
   text-align: center;
+  overflow: hidden; /* Prevents unwanted horizontal scroll on the whole page */
 }
 
 .projects-header h1 {
-  font-size: 3rem;
+  font-size: clamp(2rem, 6vw, 3rem);
   margin-bottom: 0.5rem;
+  font-weight: 700;
 }
 
 .projects-header p {
   color: #aaa;
-  margin-bottom: 2rem;
+  margin-bottom: clamp(2rem, 5vh, 4rem);
+  font-size: clamp(0.95rem, 2vw, 1.1rem);
 }
 
 /* ===== Slider Wrapper ===== */
@@ -21,43 +24,50 @@
   position: relative;
   display: flex;
   align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
 }
 
 /* Slider */
 .projects-slider {
   display: flex;
-  gap: 2rem;
+  gap: clamp(1rem, 3vw, 2rem);
   overflow-x: auto;
   scroll-behavior: smooth;
-  padding-bottom: 1rem;
+  /* Added snap scrolling for a premium mobile feel */
+  scroll-snap-type: x mandatory; 
+  padding: 20px 0;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE/Edge */
 }
 
 .projects-slider::-webkit-scrollbar {
-  display: none;
+  display: none; /* Chrome/Safari */
 }
 
-/* Slider Buttons */
+/* Slider Buttons - Hidden on Mobile */
 .slider-btn {
-  background: rgba(255, 255, 255, 0.1);
-  border: none;
+  background: rgba(127, 90, 240, 0.2);
+  border: 1px solid rgba(127, 90, 240, 0.3);
   color: #fff;
-  font-size: 2rem;
-  padding: 0.5rem 1rem;
+  font-size: 1.5rem;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
   transition: all 0.3s ease;
-  border-radius: 8px;
+  border-radius: 50%;
+  z-index: 10;
+  flex-shrink: 0;
 }
 
 .slider-btn:hover {
-  background: rgba(255, 255, 255, 0.3);
-}
-
-.slider-btn.left {
-  margin-right: 1rem;
-}
-
-.slider-btn.right {
-  margin-left: 1rem;
+  background: #7f5af0;
+  box-shadow: 0 0 20px rgba(127, 90, 240, 0.4);
 }
 
 /* ===== Project Card ===== */
@@ -65,74 +75,89 @@
   background: #1a1a2e;
   border-radius: 15px;
   overflow: hidden;
-  width: 380px;
+  /* Card is 380px on desktop, but shrinks to fit screen on mobile */
+  width: min(380px, 85vw); 
   flex: 0 0 auto;
+  scroll-snap-align: center; /* Snaps card to center on mobile swipe */
   transition: transform 0.3s ease;
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
-}
-
-.project-card:hover {
-  transform: translateY(-5px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 /* Media */
 .project-media {
-  width: 350px;
-  height: 375px;
+  width: 100%;
+  height: 250px; /* Standardized height for better alignment */
   overflow: hidden;
-  border-bottom: 1px solid #333;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .project-media img,
 .project-media video {
-  width: 280px;
+  width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.3s ease;
-}
-
-.project-card:hover .project-media img,
-.project-card:hover .project-media video {
-  transform: scale(1.05);
+  transition: transform 0.5s ease;
 }
 
 /* Content */
 .project-content {
-  padding: 1rem;
+  padding: 1.5rem;
   text-align: left;
 }
 
 .project-index {
   font-weight: bold;
   color: #7f5af0;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
 .project-title {
-  font-size: 1.5rem;
-  margin: 0.3rem 0;
+  font-size: 1.4rem;
+  margin: 0.5rem 0;
   color: #fff;
 }
 
 .project-description {
-  font-size: 1rem;
+  font-size: 0.95rem;
   color: #ccc;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
+  line-height: 1.5;
+  /* Limit description to 3 lines on mobile for consistency */
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 /* View Project Button */
 .project-link {
   display: inline-block;
-  padding: 0.5rem 1.2rem;
+  padding: 0.6rem 1.4rem;
   background: linear-gradient(90deg, #7f5af0, #0fbcf9);
   color: #fff;
   text-decoration: none;
   border-radius: 8px;
   font-weight: bold;
   transition: all 0.3s ease;
+  width: fit-content;
 }
 
-.project-link:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+/* ===== Responsive Mobile Tweaks ===== */
+@media (max-width: 768px) {
+  .slider-btn {
+    display: none; /* Mobile users prefer swiping over clicking arrows */
+  }
+
+  .project-card:hover {
+    transform: none; /* Prevents weird hover issues on touch screens */
+  }
+
+  .projects-slider {
+    padding-left: 5vw; /* Shows a peek of the next card */
+    padding-right: 5vw;
+    gap: 1rem;
+  }
 }

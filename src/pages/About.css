@@ -1,39 +1,42 @@
 .about-section {
-  background-color: #0a0416; /* Same as Home page */
+  background-color: #0a0416;
   color: white;
-  padding: 120px 10% 80px 10%;
+  /* Fluid padding: scales between 40px/5% and 120px/10% based on screen width */
+  padding: clamp(60px, 8vw, 120px) clamp(5%, 8vw, 10%);
   min-height: 100vh;
   font-family: 'Poppins', sans-serif;
-  /* Subtle glow effects matching home page */
   background-image: 
     radial-gradient(circle at 10% 20%, rgba(199, 112, 254, 0.05) 0%, transparent 40%),
     radial-gradient(circle at 90% 80%, rgba(199, 112, 254, 0.05) 0%, transparent 40%);
 }
 
 .about-heading {
-  font-size: 3rem;
+  /* Fluid font-size: 2rem on mobile, 3rem on laptop */
+  font-size: clamp(2rem, 5vw, 3rem);
   font-weight: 700;
   margin-bottom: 40px;
   text-align: center;
 }
 
 .purple {
-  color: #c770fe; /* Signature purple accent */
+  color: #c770fe;
 }
 
 /* Bio Card Glassmorphism */
 .about-card {
   background: rgba(255, 255, 255, 0.02);
   border: 1px solid rgba(199, 112, 254, 0.2);
-  padding: 50px;
+  /* Fluid internal padding */
+  padding: clamp(25px, 5vw, 50px);
   border-radius: 20px;
   backdrop-filter: blur(10px);
   margin-bottom: 80px;
 }
 
 .about-para {
-  font-size: 1.3rem;
-  line-height: 1.8;
+  /* Slightly smaller base size for better readability across devices */
+  font-size: clamp(1.05rem, 2vw, 1.25rem);
+  line-height: 1.7;
   margin-bottom: 25px;
   color: #d1d1d1;
 }
@@ -48,49 +51,55 @@
 .activity-grid {
   display: flex;
   flex-wrap: wrap;
-  gap: 15px;
+  gap: 12px;
 }
 
 .activity-item {
-  font-size: 1.1rem;
+  font-size: 1rem;
   color: #c770fe;
   background: rgba(199, 112, 254, 0.1);
-  padding: 10px 20px;
+  padding: 8px 18px;
   border-radius: 50px;
+  border: 1px solid rgba(199, 112, 254, 0.2);
 }
 
 /* Skills Grid */
 .skills-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-  gap: 25px;
+  /* minmax(120px) ensures items don't get too small on mobile */
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 20px;
 }
 
 .skill-box {
-  padding: 35px 15px;
+  padding: 30px 15px;
   border: 1px solid rgba(199, 112, 254, 0.3);
   border-radius: 12px;
   background: rgba(255, 255, 255, 0.03);
   backdrop-filter: blur(5px);
   text-align: center;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   font-weight: 500;
   transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .skill-box:hover {
-  transform: translateY(-10px);
+  transform: translateY(-8px);
   border-color: #c770fe;
   background: rgba(199, 112, 254, 0.15);
-  box-shadow: 0 10px 30px rgba(199, 112, 254, 0.3);
+  box-shadow: 0 10px 30px rgba(199, 112, 254, 0.2);
 }
 
-/* Responsive Scaling */
-@media (max-width: 768px) {
-  .about-card {
-    padding: 30px;
+/* Specific Mobile Optimization for the Grid */
+@media (max-width: 480px) {
+  .skills-grid {
+    /* 2 columns on very small phones */
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
   }
-  .about-heading {
-    font-size: 2.2rem;
+  
+  .skill-box {
+    padding: 20px 10px;
+    font-size: 0.95rem;
   }
 }
